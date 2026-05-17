@@ -1,0 +1,10 @@
+const router = require('express').Router({ mergeParams: true });
+const auth = require('../middleware/auth');
+const ctrl = require('../controllers/salaryStructureController');
+router.use(auth);
+router.get('/', ctrl.listStructures);
+router.post('/', ctrl.createStructure);
+router.get('/compute/:employeeId', ctrl.computePayslip);
+router.get('/:id', ctrl.getStructure);
+router.put('/:id', ctrl.updateStructure);
+module.exports = router;

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ERP System — User Manual</title>
+<style>
+  /* ── Reset & Base ──────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 14px; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1A2332;
+    background: #fff;
+    line-height: 1.7;
+  }
+
+  /* ── Print Setup ───────────────────────────────────── */
+  @media print {
+    body { font-size: 12px; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    a { color: inherit; text-decoration: none; }
+    .cover { page-break-after: always; }
+    section { page-break-inside: avoid; }
+    h2 { page-break-before: always; }
+    h2:first-of-type { page-break-before: avoid; }
+    @page { margin: 2cm 2.2cm; size: A4; }
+    @page :first { margin: 0; }
+  }
+
+  /* ── Layout ────────────────────────────────────────── */
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 48px; }
+
+  /* ── Cover Page ────────────────────────────────────── */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 80px;
+    background: linear-gradient(135deg, #1A2332 0%, #0D4F8C 60%, #0891B2 100%);
+    color: #fff;
+    min-height: 800px;
+  }
+  .cover-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  .cover h1 span { color: #67E8F9; }
+  .cover-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin-bottom: 60px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .cover-meta strong { display: block; color: #fff; font-size: 0.95rem; margin-bottom: 2px; }
+  .cover-line {
+    width: 60px;
+    height: 4px;
+    background: #67E8F9;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  /* ── TOC ────────────────────────────────────────────── */
+  .toc { padding: 60px 80px; }
+  .toc h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 32px; color: #1A2332; }
+  .toc-list { list-style: none; }
+  .toc-list > li { margin-bottom: 10px; }
+  .toc-list > li > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-decoration: none;
+    color: #1A2332;
+    font-weight: 600;
+    font-size: 0.97rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed #E2E8F0;
+  }
+  .toc-list > li > a::after { content: attr(data-page); color: #94A3B8; font-size: 0.82rem; font-weight: 400; }
+  .toc-sub { list-style: none; padding-left: 20px; margin-top: 4px; }
+  .toc-sub li a {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #5F6B7C;
+    font-size: 0.88rem;
+    padding: 3px 0;
+  }
+  .toc-sub li a::after { content: attr(data-page); color: #CBD5E1; font-size: 0.78rem; }
+
+  /* ── Section Layout ────────────────────────────────── */
+  .content { padding: 0 80px 60px; }
+
+  h2.section-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1A2332;
+    margin: 60px 0 8px;
+    padding-top: 20px;
+  }
+  h2.section-title .num {
+    display: inline-block;
+    background: #0D4F8C;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 8px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .section-desc {
+    color: #5F6B7C;
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid #E2E8F0;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0D4F8C;
+    margin: 28px 0 10px;
+  }
+  h3::before { content: '▸ '; color: #0891B2; }
+
+  h4 {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #1A2332;
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 12px; color: #374151; }
+
+  ul, ol {
+    margin: 10px 0 16px 22px;
+    color: #374151;
+  }
+  li { margin-bottom: 5px; }
+
+  /* ── Info Boxes ────────────────────────────────────── */
+  .box {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .box-tip { background: #F0FDF4; border-left: 4px solid #22C55E; }
+  .box-tip strong { color: #15803D; }
+  .box-note { background: #EFF6FF; border-left: 4px solid #3B82F6; }
+  .box-note strong { color: #1D4ED8; }
+  .box-warn { background: #FFFBEB; border-left: 4px solid #F59E0B; }
+  .box-warn strong { color: #B45309; }
+  .box-danger { background: #FEF2F2; border-left: 4px solid #EF4444; }
+  .box-danger strong { color: #B91C1C; }
+
+  /* ── Steps ─────────────────────────────────────────── */
+  .steps { list-style: none; margin: 16px 0; }
+  .steps li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    background: #0D4F8C;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { display: block; margin-bottom: 3px; color: #1A2332; }
+
+  /* ── Field Table ───────────────────────────────────── */
+  .field-table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 0.875rem; }
+  .field-table th {
+    background: #1A2332;
+    color: #fff;
+    text-align: left;
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .field-table th:first-child { border-radius: 8px 0 0 0; }
+  .field-table th:last-child { border-radius: 0 8px 0 0; }
+  .field-table td { padding: 9px 14px; border-bottom: 1px solid #E2E8F0; vertical-align: top; }
+  .field-table tr:last-child td { border-bottom: none; }
+  .field-table tr:nth-child(even) td { background: #F8FAFC; }
+  .req { color: #EF4444; font-weight: 700; font-size: 0.78rem; }
+  .opt { color: #94A3B8; font-size: 0.78rem; }
+
+  /* ── Status Badge ──────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-draft { background: #F1F5F9; color: #64748B; }
+  .badge-pending { background: #FFFBEB; color: #B45309; }
+  .badge-posted { background: #EFF6FF; color: #1D4ED8; }
+  .badge-approved { background: #F0FDF4; color: #15803D; }
+  .badge-paid { background: #DCFCE7; color: #166534; }
+  .badge-overdue { background: #FEF2F2; color: #B91C1C; }
+  .badge-cancelled { background: #F1F5F9; color: #64748B; }
+  .badge-rejected { background: #FEF2F2; color: #B91C1C; }
+
+  /* ── Workflow Flow ─────────────────────────────────── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 14px 0 20px;
+  }
+  .flow-step {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1D4ED8;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .flow-arrow {
+    color: #94A3B8;
+    font-size: 1rem;
+    margin: 0 6px;
+  }
+
+  /* ── Divider ───────────────────────────────────────── */
+  .divider { border: none; border-top: 2px solid #E2E8F0; margin: 40px 0; }
+
+  /* ── Module Tag ────────────────────────────────────── */
+  .module-tag {
+    display: inline-block;
+    background: #EFF6FF;
+    color: #0D4F8C;
+    border: 1px solid #BFDBFE;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 8px;
+  }
+
+  /* ── Print button (web only) ───────────────────────── */
+  .print-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0D4F8C;
+    color: #fff;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(13,79,140,0.4);
+    z-index: 1000;
+    transition: transform 0.15s;
+  }
+  .print-btn:hover { transform: translateY(-2px); }
+
+  /* ── Page number placeholder ───────────────────────── */
+  .pg { color: #94A3B8; font-size: 0.78rem; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Complete User Guide</div>
+  <div class="cover-line"></div>
+  <h1>Enterprise<br /><span>Resource</span><br />Planning</h1>
+  <p class="cover-subtitle">A comprehensive guide to every feature of your ERP system — from first login to advanced financial reporting.</p>
+  <div class="cover-meta">
+    <div><strong>Version</strong>1.0</div>
+    <div><strong>Modules Covered</strong>37 pages · 200+ features</div>
+    <div><strong>Audience</strong>All users</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+══════════════════════════════════════════════════════ -->
+<div class="toc page-break">
+  <h2>Table of Contents</h2>
+  <ul class="toc-list">
+    <li><a href="#s1" data-page="3">1. Getting Started</a>
+      <ul class="toc-sub">
+        <li><a href="#s1-login" data-page="3">Logging In</a></li>
+        <li><a href="#s1-nav" data-page="3">Navigating the Interface</a></li>
+        <li><a href="#s1-company" data-page="4">Selecting Your Company</a></li>
+      </ul>
+    </li>
+    <li><a href="#s2" data-page="4">2. Dashboard</a></li>
+    <li><a href="#s3" data-page="5">3. Sales & CRM</a>
+      <ul class="toc-sub">
+        <li><a href="#s3-crm" data-page="5">Leads & Pipeline (CRM)</a></li>
+        <li><a href="#s3-customers" data-page="6">Customers</a></li>
+        <li><a href="#s3-quotes" data-page="7">Quotations</a></li>
+        <li><a href="#s3-so" data-page="8">Sales Orders</a></li>
+        <li><a href="#s3-inv" data-page="9">Invoices (AR)</a></li>
+        <li><a href="#s3-cn" data-page="11">Credit Notes</a></li>
+      </ul>
+    </li>
+    <li><a href="#s4" data-page="12">4. Procurement</a>
+      <ul class="toc-sub">
+        <li><a href="#s4-vendors" data-page="12">Vendors</a></li>
+        <li><a href="#s4-po" data-page="13">Purchase Orders</a></li>
+        <li><a href="#s4-grn" data-page="14">Goods Receipt Notes (GRN)</a></li>
+        <li><a href="#s4-bills" data-page="15">Purchase Bills</a></li>
+        <li><a href="#s4-dn" data-page="16">Debit Notes</a></li>
+      </ul>
+    </li>
+    <li><a href="#s5" data-page="17">5. Inventory</a>
+      <ul class="toc-sub">
+        <li><a href="#s5-products" data-page="17">Products</a></li>
+        <li><a href="#s5-adj" data-page="18">Stock Adjustments</a></li>
+        <li><a href="#s5-transfer" data-page="19">Stock Transfers</a></li>
+      </ul>
+    </li>
+    <li><a href="#s6" data-page="20">6. Finance & Accounting</a>
+      <ul class="toc-sub">
+        <li><a href="#s6-coa" data-page="20">Chart of Accounts</a></li>
+        <li><a href="#s6-journals" data-page="21">Journal Entries</a></li>
+        <li><a href="#s6-payments" data-page="22">Payments</a></li>
+        <li><a href="#s6-recon" data-page="23">Bank Reconciliation</a></li>
+        <li><a href="#s6-assets" data-page="24">Fixed Assets</a></li>
+        <li><a href="#s6-budgets" data-page="25">Budgets</a></li>
+        <li><a href="#s6-aging" data-page="26">AP Aging & AR Aging</a></li>
+        <li><a href="#s6-period" data-page="27">Period Management</a></li>
+        <li><a href="#s6-recurring" data-page="28">Recurring Transactions</a></li>
+        <li><a href="#s6-reports" data-page="29">Financial Reports</a></li>
+      </ul>
+    </li>
+    <li><a href="#s7" data-page="30">7. HR & Payroll</a>
+      <ul class="toc-sub">
+        <li><a href="#s7-emp" data-page="30">Employees</a></li>
+        <li><a href="#s7-leave" data-page="31">Leave & Attendance</a></li>
+        <li><a href="#s7-time" data-page="32">Timesheets</a></li>
+        <li><a href="#s7-expense" data-page="33">Expense Claims</a></li>
+        <li><a href="#s7-payroll" data-page="34">Payroll & Payslips</a></li>
+        <li><a href="#s7-salary" data-page="35">Salary Structures</a></li>
+      </ul>
+    </li>
+    <li><a href="#s8" data-page="36">8. Approvals & Workflow</a></li>
+    <li><a href="#s9" data-page="37">9. My Profile (Self-Service)</a></li>
+    <li><a href="#s10" data-page="38">10. Messages</a></li>
+    <li><a href="#s11" data-page="39">11. Audit Logs</a></li>
+    <li><a href="#s12" data-page="40">12. Admin Settings</a>
+      <ul class="toc-sub">
+        <li><a href="#s12-company" data-page="40">Company Profile</a></li>
+        <li><a href="#s12-bank" data-page="40">Bank Accounts</a></li>
+        <li><a href="#s12-users" data-page="41">Users & Roles</a></li>
+        <li><a href="#s12-perms" data-page="41">Permissions</a></li>
+        <li><a href="#s12-fx" data-page="42">Exchange Rates</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CONTENT
+══════════════════════════════════════════════════════ -->
+<div class="content">
+
+<!-- ─────────────────────────────────────────────────────
+     1. GETTING STARTED
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s1"><span class="num">1</span> Getting Started</h2>
+<p class="section-desc">Everything you need to know before using the ERP system for the first time.</p>
+
+<h3 id="s1-login">Logging In</h3>
+<p>Open your browser and navigate to the ERP application URL provided by your administrator. You will see the Login page.</p>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Enter your Email Address</strong>Type the email address registered for your account.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter your Password</strong>Type your password. First-time users should use the temporary password provided by their administrator.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Click "Sign In"</strong>You will be redirected to the Dashboard on success.</div></li>
+</ol>
+<div class="box box-tip"><strong>Tip:</strong> If you forget your password, contact your system administrator to reset it. You can change your password any time via Admin Settings → Change Password.</div>
+
+<h3 id="s1-nav">Navigating the Interface</h3>
+<p>The ERP interface has three main areas:</p>
+<ul>
+  <li><strong>Sidebar (left):</strong> Main navigation menu organized by module. Click a group header to expand/collapse it. Click any item to navigate to that page.</li>
+  <li><strong>Header (top):</strong> Shows the current company name, a notification bell, and your profile menu (logout, change password).</li>
+  <li><strong>Content area (center):</strong> The active page or module you are working in.</li>
+</ul>
+<div class="box box-note"><strong>Note:</strong> Some sidebar items may be hidden depending on your role and permissions. Contact your administrator if you cannot see a module you need.</div>
+
+<h3 id="s1-company">Selecting Your Company</h3>
+<p>If your account belongs to multiple companies, a company selector appears at the top of the sidebar. Click it to switch companies. All data is strictly separated per company — switching companies will reload all data for the selected company.</p>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     2. DASHBOARD
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s2"><span class="num">2</span> Dashboard</h2>
+<p class="section-desc">The Dashboard gives you a real-time financial overview of your business. It is the first screen you see after logging in.</p>
+
+<h3>What the Dashboard Shows</h3>
+<p>The dashboard is divided into several sections:</p>
+<ul>
+  <li><strong>KPI Cards (top row):</strong> Four key metrics — Total Revenue, Outstanding AR, Total Expenses, and Active Employees — each showing a trend indicator (up/down).</li>
+  <li><strong>Revenue Trend Chart:</strong> An area chart showing monthly invoice revenue for the selected date range. If no invoices exist yet, a friendly placeholder is shown.</li>
+  <li><strong>Invoice Status Distribution (pie chart):</strong> A breakdown of invoices by status — Draft, Posted, Partially Paid, Paid, Overdue, Cancelled.</li>
+  <li><strong>Recent Invoices table:</strong> The 5 most recent invoices with customer, amount, and status.</li>
+  <li><strong>Low Stock Alerts:</strong> Products whose current stock has fallen below their reorder level.</li>
+  <li><strong>Pending Approvals:</strong> A count of approvals waiting for your action.</li>
+</ul>
+
+<h3>Filtering by Date Range</h3>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Set From Date</strong>Click the "From" date field in the top-right of the dashboard header and type or select a date.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Set To Date</strong>Click the "To" date field and select the end date.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Click "Apply"</strong>The KPI cards, revenue chart, and invoice table all refresh to show data for that date range only. Default is the last 12 months.</div></li>
+</ol>
+<div class="box box-tip"><strong>Tip:</strong> Click any metric card or the "View All" link on the Recent Invoices table to navigate directly to the relevant module.</div>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     3. SALES & CRM
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s3"><span class="num">3</span> Sales & CRM</h2>
+<p class="section-desc">Manage the full sales cycle — from capturing leads to collecting payment. The Sales & CRM module covers Leads, Customers, Quotations, Sales Orders, Invoices, and Credit Notes.</p>
+
+<h3 id="s3-crm">Leads & Pipeline (CRM)</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Leads & Pipeline</span>
+<p>Track prospective customers through a structured sales pipeline. Each lead moves through stages from initial contact to a closed deal.</p>
+
+<h4>Creating a Lead</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Lead"</strong>The lead creation drawer opens on the right side.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Fill in the lead details:</strong>
+    <table class="field-table" style="margin-top:8px">
+      <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+      <tr><td>Name</td><td><span class="req">Required</span></td><td>Lead or contact person's name</td></tr>
+      <tr><td>Company</td><td><span class="opt">Optional</span></td><td>Company or organization the lead works for</td></tr>
+      <tr><td>Email</td><td><span class="opt">Optional</span></td><td>Email for follow-up communication</td></tr>
+      <tr><td>Phone</td><td><span class="opt">Optional</span></td><td>Contact phone number</td></tr>
+      <tr><td>Stage</td><td><span class="req">Required</span></td><td>Pipeline stage: New, Contacted, Qualified, Proposal, Negotiation, Won, Lost</td></tr>
+      <tr><td>Value</td><td><span class="opt">Optional</span></td><td>Estimated deal value in your company currency</td></tr>
+      <tr><td>Source</td><td><span class="opt">Optional</span></td><td>Where the lead came from (Website, Referral, etc.)</td></tr>
+    </table>
+  </div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Click "Save"</strong>The lead appears on the pipeline board.</div></li>
+</ol>
+
+<h4>Using the Pipeline View</h4>
+<p>The pipeline view shows leads as cards grouped in columns by stage. You can see the count and total value at the top of each column. Click any lead card to open its detail view and add activities.</p>
+
+<h4>Adding Activities</h4>
+<p>With a lead open, scroll to the Activity section. Enter a note describing your interaction (call, email, meeting) and click "Add Activity". All activities appear in a chronological log.</p>
+
+<h4>Converting a Lead to a Customer</h4>
+<p>When a lead is won, click the <strong>"Convert to Customer"</strong> button inside the lead detail. This automatically creates a Customer record with the same contact details. The lead stage is updated to "Won".</p>
+
+<h3 id="s3-customers">Customers</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Customers</span>
+<p>The Customers page lists all your business customers. Each customer has a profile, contact details, and a linked transaction history.</p>
+
+<h4>Creating a Customer</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Customer"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Fill in the form:</strong>
+    <table class="field-table" style="margin-top:8px">
+      <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+      <tr><td>Customer Name</td><td><span class="req">Required</span></td><td>Full legal name or trade name</td></tr>
+      <tr><td>Email</td><td><span class="opt">Optional</span></td><td>Primary billing email</td></tr>
+      <tr><td>Phone</td><td><span class="opt">Optional</span></td><td>Contact number</td></tr>
+      <tr><td>Currency</td><td><span class="opt">Optional</span></td><td>Default billing currency for this customer</td></tr>
+      <tr><td>Tax Number</td><td><span class="opt">Optional</span></td><td>VAT / GST / Tax registration number</td></tr>
+      <tr><td>Payment Terms</td><td><span class="opt">Optional</span></td><td>Net 30, Net 60, etc.</td></tr>
+      <tr><td>Credit Limit</td><td><span class="opt">Optional</span></td><td>Maximum outstanding balance allowed</td></tr>
+      <tr><td>Address</td><td><span class="opt">Optional</span></td><td>Billing / shipping address</td></tr>
+    </table>
+  </div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Click "Save"</strong></div></li>
+</ol>
+
+<h4>Customer Statement</h4>
+<p>Click on any customer row, then click <strong>"Statement"</strong> to view a complete history of invoices, credit notes, and payments for that customer. You can export this statement to CSV.</p>
+
+<h4>Searching and Filtering</h4>
+<p>Use the search bar at the top of the Customers page to filter by name or email in real time. Click any column header to sort.</p>
+
+<h3 id="s3-quotes">Quotations</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Quotations</span>
+<p>Quotations are formal price offers sent to customers before a sale is confirmed.</p>
+
+<h4>Creating a Quotation</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Quotation"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select a Customer</strong>Start typing to search from your customer list.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Set Validity Date</strong>The date until which the quote is valid for the customer.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Line Items</strong>Click "Add Line" for each product/service. Enter the product, quantity, unit price, and applicable tax rate. Subtotals and totals calculate automatically.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Add Terms & Notes</strong>Optional free-text terms and internal notes.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong>The quotation is saved in "Draft" status.</div></li>
+</ol>
+
+<h4>Quotation Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Sent</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Accepted / Rejected</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Converted to Sales Order</span>
+</div>
+<ul>
+  <li><strong>Send:</strong> Click "Send Quotation" to mark it as Sent (triggers email notification to customer).</li>
+  <li><strong>Accept / Reject:</strong> Record the customer's decision by clicking "Accept" or "Reject".</li>
+  <li><strong>Convert:</strong> Click "Convert to Sales Order" on an accepted quotation to create a Sales Order automatically.</li>
+  <li><strong>Duplicate:</strong> Click the Duplicate icon to create a copy of any quotation as a new Draft.</li>
+</ul>
+
+<h3 id="s3-so">Sales Orders</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Sales Orders</span>
+<p>Sales Orders are confirmed commitments to sell goods or services to a customer. They can be created from a Quotation or directly.</p>
+
+<h4>Creating a Sales Order</h4>
+<p>The form is identical to the Quotation form — select customer, add line items (product, quantity, price, tax). Click "Save" to create a Draft order.</p>
+
+<h4>Sales Order Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Confirmed</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Invoiced</span>
+</div>
+<ul>
+  <li><strong>Confirm:</strong> Click "Confirm Order" to move from Draft to Confirmed. Stock is reserved at this point.</li>
+  <li><strong>Create Invoice:</strong> Click "Create Invoice" on a confirmed order to automatically generate an AR Invoice with all the line items pre-populated.</li>
+  <li><strong>Assign:</strong> Use the "Assign" button to assign the order to a team member for fulfilment.</li>
+</ul>
+
+<div class="box box-note"><strong>Note:</strong> Once an invoice is created from a Sales Order, the order status changes to "Invoiced" and can no longer be modified.</div>
+
+<h3 id="s3-inv">Invoices (Accounts Receivable)</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Invoices</span>
+<p>AR Invoices are the bills you send to customers for goods or services delivered. This is the core of your receivables management.</p>
+
+<h4>Creating an Invoice</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Invoice"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Customer</strong>The customer's default currency and payment terms are auto-filled.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Set Invoice Date and Due Date</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Line Items</strong>Product, description, quantity, price, tax%. Totals calculate live.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Add Notes or Terms</strong>Appears on the printed invoice.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save as Draft</strong>or proceed to Post immediately.</div></li>
+</ol>
+
+<h4>Invoice Status Lifecycle</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Posted</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Partially Paid / Paid</span>
+</div>
+<p>Status descriptions:</p>
+<table class="field-table">
+  <tr><th>Status</th><th>Meaning</th></tr>
+  <tr><td><span class="badge badge-draft">Draft</span></td><td>Created but not yet posted. Can be freely edited.</td></tr>
+  <tr><td><span class="badge badge-posted">Posted</span></td><td>Posted to the general ledger. A journal entry has been created. Cannot be edited — can only be cancelled.</td></tr>
+  <tr><td><span class="badge badge-pending">Partially Paid</span></td><td>One or more payments have been applied but the invoice is not fully settled.</td></tr>
+  <tr><td><span class="badge badge-paid">Paid</span></td><td>Fully settled. No further payment needed.</td></tr>
+  <tr><td><span class="badge badge-overdue">Overdue</span></td><td>Past due date and not yet fully paid. Shown as a warning indicator.</td></tr>
+  <tr><td><span class="badge badge-cancelled">Cancelled</span></td><td>Voided. A reversal journal entry is automatically created.</td></tr>
+</table>
+
+<h4>Posting an Invoice</h4>
+<p>Click <strong>"Post Invoice"</strong> on a Draft invoice. This creates the GL journal entry (Debit: Accounts Receivable, Credit: Revenue) and locks the invoice for editing. The accounting period must be Open for posting to succeed.</p>
+
+<h4>Printing / PDF Export</h4>
+<p>Open any invoice and click <strong>"Print / PDF"</strong>. The browser print dialog opens with a clean, print-formatted invoice layout. Select "Save as PDF" in the print dialog to download a PDF copy.</p>
+
+<h4>Emailing an Invoice</h4>
+<p>Click <strong>"Send Email"</strong> to send the invoice to the customer's email address on file. A confirmation is shown when the email is dispatched.</p>
+
+<h4>Payment Reminder</h4>
+<p>For overdue invoices, click <strong>"Send Reminder"</strong>. A payment reminder email is automatically sent to the customer with the outstanding amount and due date.</p>
+
+<h4>Duplicating an Invoice</h4>
+<p>Click the <strong>Duplicate</strong> button (copy icon) on any invoice to create a new Draft invoice with all the same line items, customer, and dates. Useful for recurring billing.</p>
+
+<h4>Bulk Actions</h4>
+<p>On the invoice list, check the box on the left of each row (or click the header checkbox to select all) to enable bulk actions:</p>
+<ul>
+  <li><strong>Bulk Export:</strong> Download selected invoices as a CSV file.</li>
+  <li><strong>Bulk Post:</strong> Post multiple Draft invoices at once.</li>
+</ul>
+
+<h4>Search & Filters</h4>
+<p>Use the search bar to find invoices by customer name or invoice number. Use the Status dropdown to filter by Draft, Posted, Paid, etc. Use the date range fields to narrow by invoice date.</p>
+
+<h4>File Attachments</h4>
+<p>Open any invoice, scroll to the <strong>Attachments</strong> section, and click <strong>"Upload File"</strong>. Attach supporting documents (purchase orders, contracts, delivery notes). All attachments are stored securely and can be downloaded later.</p>
+
+<h3 id="s3-cn">Credit Notes</h3>
+<span class="module-tag">SIDEBAR → Sales & CRM → Credit Notes</span>
+<p>Credit Notes are issued to customers to reduce the amount they owe — for example, when goods are returned or an error was made on an invoice.</p>
+
+<h4>Creating a Credit Note</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Credit Note"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select the Customer</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Link to Original Invoice</strong>(optional but recommended) Select the invoice being credited.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Line Items</strong>Enter the products/quantities being credited.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Add a Reason</strong>Document why the credit is being issued.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save and Post</strong>Posting creates a reversing GL journal entry.</div></li>
+</ol>
+<div class="box box-warn"><strong>Important:</strong> Posting a credit note reduces the customer's outstanding balance. Make sure the accounting period is open before posting.</div>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     4. PROCUREMENT
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s4"><span class="num">4</span> Procurement</h2>
+<p class="section-desc">Manage supplier relationships and the full purchase cycle — from raising a Purchase Order to recording a supplier bill and issuing Debit Notes for returns.</p>
+
+<h3 id="s4-vendors">Vendors</h3>
+<span class="module-tag">SIDEBAR → Procurement → Vendors</span>
+<p>Vendors (also called Suppliers) are the companies or individuals from whom you purchase goods or services.</p>
+
+<h4>Creating a Vendor</h4>
+<table class="field-table">
+  <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+  <tr><td>Vendor Name</td><td><span class="req">Required</span></td><td>Supplier's legal or trade name</td></tr>
+  <tr><td>Email</td><td><span class="opt">Optional</span></td><td>Primary contact email</td></tr>
+  <tr><td>Phone</td><td><span class="opt">Optional</span></td><td>Contact number</td></tr>
+  <tr><td>Currency</td><td><span class="opt">Optional</span></td><td>Default billing currency</td></tr>
+  <tr><td>Tax Number</td><td><span class="opt">Optional</span></td><td>Supplier's VAT/GST number</td></tr>
+  <tr><td>Payment Terms</td><td><span class="opt">Optional</span></td><td>Net 30, Net 60, etc.</td></tr>
+  <tr><td>Bank Details</td><td><span class="opt">Optional</span></td><td>IBAN/account number for payment processing</td></tr>
+  <tr><td>Address</td><td><span class="opt">Optional</span></td><td>Vendor's registered address</td></tr>
+</table>
+
+<h4>Vendor Statement</h4>
+<p>Click a vendor, then <strong>"Statement"</strong> to view all purchase bills, debit notes, and payments for that vendor. Export to CSV for reconciliation.</p>
+
+<h3 id="s4-po">Purchase Orders (PO)</h3>
+<span class="module-tag">SIDEBAR → Procurement → Purchase Orders</span>
+<p>A Purchase Order is a formal document sent to a vendor to request goods or services at an agreed price.</p>
+
+<h4>Creating a Purchase Order</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New PO"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Vendor</strong>Vendor's default currency and payment terms auto-fill.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Set PO Date and Expected Delivery Date</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Line Items</strong>Select product, quantity, unit price, and tax. Totals are calculated automatically.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Add Notes or Terms</strong></div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong>PO is saved as Draft.</div></li>
+</ol>
+
+<h4>PO Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Confirmed</span><span class="flow-arrow">→</span>
+  <span class="flow-step">GRN Created</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Billed</span>
+</div>
+<ul>
+  <li><strong>Confirm PO:</strong> Click "Confirm" to send the order to the vendor. Requires the "Procurement post" permission.</li>
+  <li><strong>Create from Reorder Alert:</strong> The system automatically pre-fills a new PO with the product and suggested quantity when you click "Create PO" from a reorder alert on the Dashboard or Inventory module.</li>
+  <li><strong>Duplicate:</strong> Click the Duplicate button to copy an existing PO as a new Draft.</li>
+</ul>
+
+<h3 id="s4-grn">Goods Receipt Notes (GRN)</h3>
+<span class="module-tag">SIDEBAR → Procurement → Goods Receipts</span>
+<p>A Goods Receipt Note records the physical receipt of goods from a vendor against a Purchase Order. Creating a GRN automatically updates stock levels in the warehouse.</p>
+
+<h4>Creating a GRN</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New GRN"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select the Purchase Order</strong>All line items from the PO are pre-populated.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Received Quantities</strong>Adjust quantities if only a partial delivery was received. Unreceived items can be received in a future GRN.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Select the Warehouse</strong>Specify which warehouse the goods are being received into.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Set Receipt Date</strong>and add any notes (e.g. condition of goods).</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save & Post</strong>Stock levels are updated immediately upon posting.</div></li>
+</ol>
+<div class="box box-tip"><strong>Tip:</strong> Always create a GRN before recording a Purchase Bill. The GRN proves goods were received and is the basis for a 3-way match (PO → GRN → Bill).</div>
+
+<h3 id="s4-bills">Purchase Bills (AP)</h3>
+<span class="module-tag">SIDEBAR → Procurement → Purchase Bills</span>
+<p>Purchase Bills are vendor invoices that you owe payment on. They are the accounts payable equivalent of AR invoices.</p>
+
+<h4>Creating a Purchase Bill</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Bill"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Vendor</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Link to a GRN or PO</strong>(optional) Select a GRN to auto-populate line items from received goods.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter Bill Date and Due Date</strong>from the vendor's invoice.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Verify / Add Line Items</strong></div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save as Draft</strong>then click "Post" when ready.</div></li>
+</ol>
+<p>Posting creates the GL journal: Debit Expenses/Inventory, Credit Accounts Payable. The accounting period must be open.</p>
+
+<h4>Bill Status</h4>
+<table class="field-table">
+  <tr><th>Status</th><th>Meaning</th></tr>
+  <tr><td><span class="badge badge-draft">Draft</span></td><td>Editable, not yet in the ledger</td></tr>
+  <tr><td><span class="badge badge-posted">Posted</span></td><td>In the ledger, awaiting payment</td></tr>
+  <tr><td><span class="badge badge-paid">Paid</span></td><td>Fully paid to vendor</td></tr>
+  <tr><td><span class="badge badge-cancelled">Cancelled</span></td><td>Voided with a reversing entry</td></tr>
+</table>
+
+<h3 id="s4-dn">Debit Notes</h3>
+<span class="module-tag">SIDEBAR → Procurement → Debit Notes</span>
+<p>Debit Notes are issued to vendors when you return goods or dispute a charge. They reduce the amount you owe to the vendor.</p>
+
+<h4>Creating a Debit Note</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Debit Note"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Vendor</strong> and the original Purchase Bill being disputed or returned.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Add Line Items</strong>Enter the returned/disputed products and quantities.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter a Reason</strong>Document the reason for the return or dispute.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Save, then Post or Void</strong>Posting reduces your AP balance. Voiding cancels the debit note.</div></li>
+</ol>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     5. INVENTORY
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s5"><span class="num">5</span> Inventory</h2>
+<p class="section-desc">Track products, manage stock levels across multiple warehouses, and handle adjustments and transfers.</p>
+
+<h3 id="s5-products">Products</h3>
+<span class="module-tag">SIDEBAR → Inventory → Products</span>
+<p>Products is the master catalogue of all items your business buys, sells, or holds in stock.</p>
+
+<h4>Creating a Product</h4>
+<table class="field-table">
+  <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+  <tr><td>Product Name</td><td><span class="req">Required</span></td><td>Name of the item</td></tr>
+  <tr><td>SKU / Code</td><td><span class="opt">Optional</span></td><td>Your internal product code or barcode</td></tr>
+  <tr><td>Category</td><td><span class="opt">Optional</span></td><td>Grouping (e.g. Electronics, Furniture)</td></tr>
+  <tr><td>Unit of Measure</td><td><span class="opt">Optional</span></td><td>pcs, kg, litre, box, etc.</td></tr>
+  <tr><td>Cost Price</td><td><span class="opt">Optional</span></td><td>Purchase cost per unit</td></tr>
+  <tr><td>Sale Price</td><td><span class="opt">Optional</span></td><td>Default selling price per unit</td></tr>
+  <tr><td>Tax Rate</td><td><span class="opt">Optional</span></td><td>Default tax percentage applied on sale</td></tr>
+  <tr><td>Reorder Level</td><td><span class="opt">Optional</span></td><td>Stock level that triggers a reorder alert on the dashboard</td></tr>
+  <tr><td>Reorder Quantity</td><td><span class="opt">Optional</span></td><td>Suggested order quantity when restocking</td></tr>
+  <tr><td>Type</td><td><span class="opt">Optional</span></td><td>Product, Service, or Bundle</td></tr>
+</table>
+
+<h4>Stock Levels View</h4>
+<p>Click any product to see its current stock level across all warehouses, its valuation, and its transaction history (receipts, sales, adjustments, transfers).</p>
+
+<h4>Reorder Alerts</h4>
+<p>When a product's stock falls below its Reorder Level, it appears in the <strong>Dashboard → Low Stock Alerts</strong> section. Click "Create PO" next to any alert to automatically open the New Purchase Order form pre-populated with that product and its reorder quantity.</p>
+
+<h3 id="s5-adj">Stock Adjustments</h3>
+<span class="module-tag">SIDEBAR → Inventory → Stock Adjustments</span>
+<p>Stock Adjustments correct inventory quantities for reasons like physical count discrepancies, spoilage, theft, or initial stock entry.</p>
+
+<h4>Creating a Stock Adjustment</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Adjustment"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Warehouse</strong>Choose which warehouse to adjust.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select Type</strong>
+    <ul>
+      <li><strong>Increase:</strong> Add stock (e.g. found extra inventory)</li>
+      <li><strong>Decrease:</strong> Remove stock (e.g. spoilage, write-off)</li>
+      <li><strong>Recount:</strong> Set an absolute quantity</li>
+    </ul>
+  </div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Select Product and enter Quantity</strong></div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Enter Reason</strong>e.g. "Annual stocktake Q4", "Damaged goods".</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save Draft, then Post</strong>Posting commits the adjustment to stock and creates a GL entry to Inventory Variance.</div></li>
+</ol>
+<div class="box box-warn"><strong>Warning:</strong> Posted adjustments cannot be reversed. Verify quantities carefully before posting.</div>
+
+<h3 id="s5-transfer">Stock Transfers</h3>
+<span class="module-tag">SIDEBAR → Inventory → Stock Transfers</span>
+<p>Stock Transfers move inventory from one warehouse to another without changing overall stock quantity. Each transfer is numbered automatically (TRF-YYYY-NNNNN).</p>
+
+<h4>Creating a Transfer</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Select "From" Warehouse</strong>The source warehouse.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select "To" Warehouse</strong>Must be different from the source. Use the swap button (⇄) to quickly reverse the direction.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select Product</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter Quantity</strong>Cannot exceed available stock in the From warehouse.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Set Transfer Date and add Notes</strong></div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Click "Transfer"</strong>Stock is moved immediately.</div></li>
+</ol>
+
+<h4>Transfer History</h4>
+<p>The bottom section of the page shows a paginated history of all transfers. Use the Export CSV button to download the full transfer log.</p>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     6. FINANCE & ACCOUNTING
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s6"><span class="num">6</span> Finance & Accounting</h2>
+<p class="section-desc">The Finance module covers the general ledger, payments, bank reconciliation, fixed assets, budgets, aging reports, period management, and all financial statements.</p>
+
+<h3 id="s6-coa">Chart of Accounts</h3>
+<span class="module-tag">SIDEBAR → Finance → Chart of Accounts</span>
+<p>The Chart of Accounts (COA) is the foundation of your accounting system. Every financial transaction is posted to one or more accounts.</p>
+
+<h4>Account Types</h4>
+<table class="field-table">
+  <tr><th>Type</th><th>Description</th><th>Examples</th></tr>
+  <tr><td>Asset</td><td>Things you own</td><td>Cash, Accounts Receivable, Equipment</td></tr>
+  <tr><td>Liability</td><td>Things you owe</td><td>Accounts Payable, Loans, VAT Payable</td></tr>
+  <tr><td>Equity</td><td>Owners' stake</td><td>Share Capital, Retained Earnings</td></tr>
+  <tr><td>Revenue</td><td>Income earned</td><td>Sales Revenue, Service Income</td></tr>
+  <tr><td>Expense</td><td>Costs incurred</td><td>Cost of Goods Sold, Salaries, Rent</td></tr>
+</table>
+
+<h4>Creating an Account</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Account"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter Account Code</strong>e.g. 1001, 2100, 4000. Use a consistent numbering scheme.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Account Name</strong>e.g. "Trade Receivables".</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Select Type</strong>Asset, Liability, Equity, Revenue, or Expense.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Optionally set a Parent Account</strong>for hierarchical grouping.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong></div></li>
+</ol>
+
+<h3 id="s6-journals">Journal Entries</h3>
+<span class="module-tag">SIDEBAR → Finance → (via Finance page)</span>
+<p>Manual journal entries allow you to record any financial transaction that is not generated automatically by the system.</p>
+
+<h4>Creating a Journal Entry</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Navigate to Finance and click "New Journal"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Set the Journal Date</strong>Must be within an open accounting period.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter a Reference / Description</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Debit and Credit Lines</strong>Select the account, enter the amount. Total debits must equal total credits (the system validates this).</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Save as Draft</strong>then click <strong>Post</strong> to commit to the ledger.</div></li>
+</ol>
+<div class="box box-danger"><strong>Important:</strong> Journal entries can only be posted when the accounting period is Open. Posted journals cannot be deleted — they can only be reversed by posting a new reversing journal.</div>
+
+<h3 id="s6-payments">Payments</h3>
+<span class="module-tag">SIDEBAR → Payments</span>
+<p>The Payments module records money coming in from customers (receipts) and money going out to vendors (disbursements).</p>
+
+<h4>Recording a Payment</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Payment"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Type</strong>
+    <ul><li><strong>Receipt:</strong> Money received from a customer</li><li><strong>Disbursement:</strong> Money paid to a vendor</li></ul>
+  </div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select Customer or Vendor</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter Payment Amount, Date, and Method</strong>(Bank Transfer, Cash, Cheque, etc.)</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Select Bank Account</strong>The bank account from/to which the payment moves.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong>The payment is recorded and the GL is updated.</div></li>
+</ol>
+
+<h4>Applying a Payment to an Invoice / Bill</h4>
+<p>After recording a payment, click <strong>"Apply"</strong> on the payment row to link it to one or more open invoices or bills. This updates their paid status (Partially Paid or Paid).</p>
+
+<h3 id="s6-recon">Bank Reconciliation</h3>
+<span class="module-tag">SIDEBAR → Finance → Bank Reconciliation</span>
+<p>Bank Reconciliation matches your bank statement transactions against the payments recorded in the ERP to ensure accuracy.</p>
+
+<h4>Starting a Reconciliation</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Statement"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Bank Account</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Statement Date and Closing Balance</strong>from your bank statement.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Statement Lines</strong>Enter each transaction from your bank statement (description, date, debit or credit amount).</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Save</strong>The system shows suggested matches from your recorded payments.</div></li>
+</ol>
+
+<h4>Matching Transactions</h4>
+<p>For each bank statement line, the system suggests matching ERP payments. Click <strong>"Match"</strong> next to a suggestion to confirm the match. Manually matched lines turn green. When all lines are matched and the balance agrees, click <strong>"Reconcile"</strong> to close the reconciliation.</p>
+
+<div class="box box-tip"><strong>Tip:</strong> If a bank line has no match, it may be an unrecorded payment. Record the payment in the Payments module first, then return to reconciliation.</div>
+
+<h3 id="s6-assets">Fixed Assets</h3>
+<span class="module-tag">SIDEBAR → Finance → Fixed Assets</span>
+<p>Fixed Assets tracks long-lived assets (equipment, vehicles, furniture) and calculates depreciation automatically.</p>
+
+<h4>Creating a Fixed Asset</h4>
+<table class="field-table">
+  <tr><th>Field</th><th>Description</th></tr>
+  <tr><td>Asset Name</td><td>e.g. "Office Laptop – Dell XPS"</td></tr>
+  <tr><td>Asset Code</td><td>Internal identifier</td></tr>
+  <tr><td>Category</td><td>Computer Equipment, Furniture, Vehicle, etc.</td></tr>
+  <tr><td>Purchase Date</td><td>Date the asset was acquired</td></tr>
+  <tr><td>Purchase Cost</td><td>Total acquisition cost including taxes</td></tr>
+  <tr><td>Useful Life (months)</td><td>Expected number of months the asset will be used</td></tr>
+  <tr><td>Residual Value</td><td>Expected value at end of useful life (scrap value)</td></tr>
+  <tr><td>Depreciation Method</td><td>Straight-Line or Declining Balance</td></tr>
+  <tr><td>GL Account</td><td>Which asset account to post to</td></tr>
+</table>
+
+<h4>Running Depreciation</h4>
+<p>Click <strong>"Depreciate"</strong> on any asset to record the current period's depreciation. A GL journal is created: Debit Depreciation Expense, Credit Accumulated Depreciation. View the full depreciation schedule via <strong>"Schedule"</strong>.</p>
+
+<h4>Disposing an Asset</h4>
+<p>When an asset is sold or scrapped, click <strong>"Dispose"</strong>. Enter the disposal date and proceeds. A gain or loss is calculated and posted to the ledger.</p>
+
+<h3 id="s6-budgets">Budgets</h3>
+<span class="module-tag">SIDEBAR → Finance → Budgets</span>
+<p>Budgets let you plan expected revenues and expenses by account and track actual vs. budgeted performance.</p>
+
+<h4>Creating a Budget</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Budget"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter Budget Name, Fiscal Year, and Period</strong>(e.g. Monthly, Quarterly, Annual).</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Add Budget Lines</strong>For each GL account, enter the budgeted amount per period.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Save and Activate</strong>Click "Activate" to make the budget live. Active budgets are used in variance reports.</div></li>
+</ol>
+
+<h4>Budget Variance Report</h4>
+<p>Click <strong>"Variance"</strong> on an active budget to see actual vs. budgeted amounts for each account. Overspends are highlighted in red, underspends in green.</p>
+
+<h3 id="s6-aging">AP Aging & AR Aging</h3>
+<span class="module-tag">SIDEBAR → Finance → AP Aging / AR Aging</span>
+<p>Aging reports show outstanding balances grouped by how long they have been outstanding. They help identify overdue receivables and payables.</p>
+
+<h4>Using the Aging Report</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Select the "As of Date"</strong>The report calculates aging based on this date.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Click "Run Report"</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>View Results</strong>Each customer/vendor appears with their balance split into columns:
+    <ul>
+      <li>Current (not yet due)</li>
+      <li>1–30 days overdue</li>
+      <li>31–60 days overdue</li>
+      <li>61–90 days overdue</li>
+      <li>90+ days overdue</li>
+    </ul>
+  </div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Export to CSV</strong>for further analysis or follow-up action.</div></li>
+</ol>
+
+<h3 id="s6-period">Period Management</h3>
+<span class="module-tag">SIDEBAR → Finance → Period Management (also in Admin Settings)</span>
+<p>Accounting periods control which months are open for posting. Closing a period prevents backdated entries from being made.</p>
+
+<h4>Opening a Period</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Select the Month and Year</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Click "Open Period"</strong>The period status changes to Open. Transactions can now be posted for this period.</div></li>
+</ol>
+
+<h4>Closing a Period</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Select the open period</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Click "Close Period"</strong>No more transactions can be posted to this period. Requires the Finance update permission.</div></li>
+</ol>
+
+<div class="box box-warn"><strong>Warning:</strong> Closing a period is final. If you need to post a transaction to a closed period, it must be reopened by an administrator. Always close periods only after all month-end entries are complete.</div>
+
+<p><strong>Period Status indicators:</strong></p>
+<ul>
+  <li><span class="badge badge-approved">Open</span> — Transactions can be posted</li>
+  <li><span class="badge badge-cancelled">Closed</span> — No new postings allowed</li>
+</ul>
+
+<h3 id="s6-recurring">Recurring Transactions</h3>
+<span class="module-tag">SIDEBAR → Finance → Recurring</span>
+<p>Recurring Transactions automate the creation of regular journal entries (e.g. monthly rent, subscription fees, depreciation).</p>
+
+<h4>Creating a Recurring Template</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Template"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter Name and Description</strong>e.g. "Monthly Office Rent".</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Set Frequency</strong>Daily, Weekly, Monthly, Quarterly, Yearly.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Set Start Date and End Date</strong>(optional — leave blank for indefinite).</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Add Journal Lines</strong>Same debit/credit structure as a manual journal entry.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save and Activate</strong>Toggle the template to Active.</div></li>
+</ol>
+
+<h4>Running a Recurring Template</h4>
+<p>Click <strong>"Run Now"</strong> on any active template to immediately generate the next journal entry. The system tracks the last run date and next run date. You can also toggle a template off temporarily without deleting it.</p>
+
+<h3 id="s6-reports">Financial Reports</h3>
+<span class="module-tag">SIDEBAR → Finance → Reports</span>
+<p>The Reports module generates standard financial statements. All reports can be filtered by date range and exported to CSV.</p>
+
+<h4>Available Reports</h4>
+<table class="field-table">
+  <tr><th>Report</th><th>What It Shows</th></tr>
+  <tr><td>Profit & Loss (Income Statement)</td><td>Revenue minus expenses for a period. Shows gross profit, operating profit, and net profit.</td></tr>
+  <tr><td>Balance Sheet</td><td>Snapshot of assets, liabilities, and equity at a point in time.</td></tr>
+  <tr><td>Cash Flow Statement</td><td>Cash inflows and outflows from operating, investing, and financing activities.</td></tr>
+  <tr><td>Tax Report</td><td>Summary of tax collected and paid, organized by tax rate.</td></tr>
+  <tr><td>Trial Balance</td><td>List of all accounts with their debit and credit balances. Debits and credits must be equal.</td></tr>
+  <tr><td>Sales Analytics</td><td>Revenue breakdown by product, customer, period, and sales rep.</td></tr>
+  <tr><td>AP Aging</td><td>Outstanding amounts owed to vendors, grouped by age.</td></tr>
+  <tr><td>AR Aging</td><td>Outstanding amounts owed by customers, grouped by age.</td></tr>
+  <tr><td>Audit Log</td><td>Complete log of all system actions by user.</td></tr>
+</table>
+
+<h4>Generating a Report</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click the report name</strong>from the Reports page.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Set the date range</strong>using the From / To date fields.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Click "Generate"</strong>or "Run Report".</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Export</strong>Click the Export CSV button to download the report for use in spreadsheets.</div></li>
+</ol>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     7. HR & PAYROLL
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s7"><span class="num">7</span> HR & Payroll</h2>
+<p class="section-desc">Manage the full employee lifecycle — from onboarding to payslip generation — including leave, timesheets, expenses, and salary structures.</p>
+
+<h3 id="s7-emp">Employees</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Employees</span>
+<p>The Employees page is the central record for all staff members.</p>
+
+<h4>Creating an Employee</h4>
+<table class="field-table">
+  <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+  <tr><td>First Name / Last Name</td><td><span class="req">Required</span></td><td>Employee's legal name</td></tr>
+  <tr><td>Employee ID</td><td><span class="req">Required</span></td><td>Internal employee number (auto-generated or custom)</td></tr>
+  <tr><td>Email</td><td><span class="req">Required</span></td><td>Work email address (used for login)</td></tr>
+  <tr><td>Department</td><td><span class="opt">Optional</span></td><td>e.g. Sales, Finance, Operations</td></tr>
+  <tr><td>Position / Job Title</td><td><span class="opt">Optional</span></td><td>Role within the company</td></tr>
+  <tr><td>Hire Date</td><td><span class="req">Required</span></td><td>Date of joining</td></tr>
+  <tr><td>Employment Type</td><td><span class="opt">Optional</span></td><td>Full-time, Part-time, Contract</td></tr>
+  <tr><td>Salary Structure</td><td><span class="opt">Optional</span></td><td>Link to a salary structure template for payroll</td></tr>
+  <tr><td>Bank Account</td><td><span class="opt">Optional</span></td><td>Bank details for salary payment</td></tr>
+  <tr><td>Emergency Contact</td><td><span class="opt">Optional</span></td><td>Next of kin details</td></tr>
+</table>
+
+<h4>Terminating an Employee</h4>
+<p>Click on an employee record and click <strong>"Terminate"</strong>. Enter the termination date and reason. The employee is marked as Terminated and excluded from future payroll runs. This action requires the HR delete permission.</p>
+
+<h3 id="s7-leave">Leave & Attendance</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Leave & Attendance</span>
+<p>Manage leave requests and daily attendance records for all employees.</p>
+
+<h4>Applying for Leave</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "Apply Leave"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Employee</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select Leave Type</strong>Annual Leave, Sick Leave, Unpaid Leave, etc.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter Start Date and End Date</strong></div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Enter Reason</strong>(optional)</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Submit</strong>The leave request status is "Pending" until approved.</div></li>
+</ol>
+
+<h4>Approving or Rejecting Leave</h4>
+<p>HR managers see all pending leave requests. Click <strong>"Approve"</strong> or <strong>"Reject"</strong> on any request. Rejected requests show a reason field. Leave balances are automatically updated upon approval.</p>
+
+<h4>Leave Balance</h4>
+<p>Click on any employee, then select the <strong>"Leave Balance"</strong> tab to see their remaining entitlement for each leave type.</p>
+
+<h4>Attendance</h4>
+<p>Use the Attendance section to mark daily presence (Present, Absent, Half Day, Work From Home). The <strong>Attendance Summary</strong> report shows monthly attendance statistics per employee.</p>
+
+<h3 id="s7-time">Timesheets</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Timesheets</span>
+<p>Timesheets track hours worked per employee per week, broken down by day and project/task.</p>
+
+<h4>Creating a Timesheet</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Timesheet"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Employee</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Set Week Start Date</strong>The system automatically assigns dates Monday through Sunday.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Enter Hours per Day</strong>For each day (Mon–Sun), enter the hours worked. Days with zero hours are excluded automatically.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Optionally enter Project / Task</strong>for each day's entry.</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong>The timesheet is saved as Draft.</div></li>
+</ol>
+
+<h4>Timesheet Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Submitted</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Approved / Rejected</span>
+</div>
+<ul>
+  <li><strong>Submit:</strong> Employee clicks "Submit" when the week is complete.</li>
+  <li><strong>Approve / Reject:</strong> HR manager reviews submitted timesheets and approves or rejects them.</li>
+</ul>
+
+<h4>Export</h4>
+<p>Click the <strong>Export CSV</strong> button to download all visible timesheets for payroll processing or client billing.</p>
+
+<h3 id="s7-expense">Expense Claims</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Expense Claims</span>
+<p>Employees submit expense claims for business-related out-of-pocket costs. Managers approve or reject them, and finance marks them as paid once reimbursed.</p>
+
+<h4>Creating an Expense Claim</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Claim"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Employee</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Add Expense Lines</strong>For each expense, enter:
+    <ul>
+      <li>Date of expense</li>
+      <li>Category (Travel, Meals, Software, etc.)</li>
+      <li>Description</li>
+      <li>Amount</li>
+      <li>Receipt (attach a scan or photo)</li>
+    </ul>
+  </div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Save as Draft</strong></div></li>
+</ol>
+
+<h4>Expense Claim Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Submitted</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Approved / Rejected</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Paid</span>
+</div>
+<ul>
+  <li><strong>Submit:</strong> Sends the claim to HR for review.</li>
+  <li><strong>Approve / Reject:</strong> HR reviews and approves or rejects with comments.</li>
+  <li><strong>Mark Paid:</strong> Finance marks approved claims as paid once the reimbursement is processed.</li>
+</ul>
+
+<h4>File Attachments on Claims</h4>
+<p>In the claim detail view, use the <strong>Attachments</strong> section to upload receipt images or PDF scans. Multiple files per claim are supported.</p>
+
+<h3 id="s7-payroll">Payroll & Payslips</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Payroll</span>
+<p>The Payroll module generates payslips for employees based on their linked Salary Structure.</p>
+
+<h4>Generating a Payslip</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "Generate Payslip"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Employee</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select Pay Period</strong>Month and Year.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Click "Generate"</strong>The system calculates earnings and deductions from the employee's Salary Structure and any approved expense claims or advances.</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Review the Payslip</strong>Verify gross pay, deductions, and net pay.</div></li>
+</ol>
+
+<h4>Bulk Payroll Run</h4>
+<p>Click <strong>"Bulk Generate"</strong> to generate payslips for all active employees in a single month at once. Review individual payslips afterwards and approve them.</p>
+
+<h4>Payslip Workflow</h4>
+<div class="flow">
+  <span class="flow-step">Draft</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Approved</span><span class="flow-arrow">→</span>
+  <span class="flow-step">Paid</span>
+</div>
+<ul>
+  <li><strong>Approve:</strong> HR manager approves the payslip to confirm the amounts are correct.</li>
+  <li><strong>Mark Paid:</strong> Finance marks the payslip as paid once salaries are transferred.</li>
+</ul>
+
+<h4>Printing a Payslip</h4>
+<p>Open any payslip and click <strong>"Print"</strong>. The browser opens a print-formatted payslip. Select "Save as PDF" in the print dialog to provide a PDF copy to the employee.</p>
+
+<h3 id="s7-salary">Salary Structures</h3>
+<span class="module-tag">SIDEBAR → HR & Payroll → Salary Structures</span>
+<p>Salary Structures define the earnings and deduction components used to calculate an employee's payslip.</p>
+
+<h4>Creating a Salary Structure</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Structure"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter Structure Name</strong>e.g. "Standard Monthly – Grade 3".</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Add Earnings Components</strong>
+    <ul>
+      <li>Basic Salary (fixed amount or percentage of CTC)</li>
+      <li>Housing Allowance</li>
+      <li>Transport Allowance</li>
+      <li>Performance Bonus</li>
+      <li>Any other taxable / non-taxable earning</li>
+    </ul>
+  </div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Add Deduction Components</strong>
+    <ul>
+      <li>Income Tax (PAYE / Withholding)</li>
+      <li>Pension / Provident Fund</li>
+      <li>Medical Aid</li>
+      <li>Loan Repayment</li>
+    </ul>
+  </div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Save</strong>The structure is now available to link to employees.</div></li>
+</ol>
+
+<h4>Assigning to an Employee</h4>
+<p>Go to the Employee record and set the <strong>Salary Structure</strong> field to the desired template. When a payslip is generated for that employee, all the components are automatically calculated.</p>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     8. APPROVALS & WORKFLOW
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s8"><span class="num">8</span> Approvals & Workflow</h2>
+<p class="section-desc">The Approvals module manages multi-step approval workflows. Leave requests, expense claims, purchase orders, invoices, and other documents can be routed through configurable approval chains.</p>
+
+<h3>Viewing Approvals</h3>
+<p>The Approvals page has two tabs:</p>
+<ul>
+  <li><strong>My Pending:</strong> Approvals where you are the next approver. The count badge shows how many are waiting for your action.</li>
+  <li><strong>All Approvals:</strong> A full list of all approval requests in the system with status and history (visible to managers and admins).</li>
+</ul>
+
+<h3>Approving or Rejecting a Request</h3>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click a row</strong>to open the step detail panel on the right, showing all approval steps and who has acted.</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Click "Approve" or "Reject"</strong>from either the row action buttons or the detail panel.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Add Comments</strong>(optional but recommended, especially for rejections).</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Click "Confirm"</strong>Your decision is recorded with a timestamp. If there are more approvers in the chain, the next approver is notified.</div></li>
+</ol>
+
+<h3>Bulk Approve</h3>
+<p>On the "All Approvals" tab, check multiple rows and click <strong>"Approve Selected"</strong> to bulk-approve multiple pending requests in one action.</p>
+
+<h3>Approval Steps Panel</h3>
+<p>When you click an approval row, a panel slides in showing each step in the workflow. Steps show:</p>
+<ul>
+  <li>Approver name and role</li>
+  <li>Status: Pending <span class="badge badge-pending">Pending</span>, Approved <span class="badge badge-approved">Approved</span>, or Rejected <span class="badge badge-rejected">Rejected</span></li>
+  <li>Timestamp and comments from when the action was taken</li>
+</ul>
+
+<h3>Filtering and Exporting</h3>
+<p>On the All Approvals tab, filter by status (Pending, Approved, Rejected, Cancelled). Select rows and click <strong>"Export Selected"</strong> to download a CSV.</p>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     9. MY PROFILE (SELF-SERVICE)
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s9"><span class="num">9</span> My Profile (Employee Self-Service)</h2>
+<p class="section-desc">Every employee has a personal self-service portal to view their own data without needing access to the full HR module.</p>
+<span class="module-tag">SIDEBAR → My Profile</span>
+
+<h3>What You Can See in My Profile</h3>
+<table class="field-table">
+  <tr><th>Section</th><th>What It Shows</th></tr>
+  <tr><td>Profile</td><td>Your personal details, job title, department, hire date, and contact information.</td></tr>
+  <tr><td>My Payslips</td><td>A list of all your generated payslips. Click any payslip to view earnings, deductions, and net pay. Print or save as PDF.</td></tr>
+  <tr><td>My Leave</td><td>All your submitted and approved leave requests. Apply for new leave from this tab.</td></tr>
+  <tr><td>My Timesheets</td><td>All your weekly timesheet submissions and their current approval status.</td></tr>
+  <tr><td>My Expenses</td><td>All your submitted expense claims and their reimbursement status.</td></tr>
+</table>
+
+<div class="box box-note"><strong>Note:</strong> My Profile is read-only for most fields. To update personal information, contact your HR administrator.</div>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     10. MESSAGES
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s10"><span class="num">10</span> Messages</h2>
+<p class="section-desc">The Messages module is an internal communication tool for sending and receiving messages between users within the same company.</p>
+<span class="module-tag">SIDEBAR → Messages</span>
+
+<h3>Sending a Message</h3>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Message" or "Compose"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Recipient</strong>from the list of users in your company.</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Subject and Message Body</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Click "Send"</strong>The recipient receives a notification badge on the Messages icon.</div></li>
+</ol>
+
+<h3>Reading Messages</h3>
+<p>The message list shows your inbox. Click any message to read it. Unread messages are shown in bold with an unread indicator. The notification bell in the header also shows a count of unread messages.</p>
+
+<h3>Archiving Messages</h3>
+<p>Click the <strong>Archive</strong> button on a message to move it out of your main inbox. Archived messages can be retrieved by filtering for "Archived" messages.</p>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     11. AUDIT LOGS
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s11"><span class="num">11</span> Audit Logs</h2>
+<p class="section-desc">Audit Logs provide a complete, tamper-proof record of every action taken in the system — who did what and when.</p>
+<span class="module-tag">SIDEBAR → Workflow → Audit Log</span>
+
+<h3>What Is Logged?</h3>
+<p>Every significant action is recorded, including:</p>
+<ul>
+  <li>Creating, editing, or deleting any record</li>
+  <li>Posting or cancelling invoices and bills</li>
+  <li>Approving or rejecting requests</li>
+  <li>Changing user permissions or roles</li>
+  <li>Login events</li>
+  <li>Configuration changes in Admin Settings</li>
+</ul>
+
+<h3>Searching the Audit Log</h3>
+<p>Filter by:</p>
+<ul>
+  <li><strong>User:</strong> See actions taken by a specific user</li>
+  <li><strong>Module:</strong> Filter by Sales, Finance, HR, etc.</li>
+  <li><strong>Action:</strong> Create, Update, Delete, Post, Login, etc.</li>
+  <li><strong>Date Range:</strong> Narrow to a specific period</li>
+</ul>
+<p>Click <strong>Export CSV</strong> to download the filtered audit log for compliance reporting.</p>
+
+<div class="box box-note"><strong>Note:</strong> Audit Logs are read-only. No user can modify or delete audit entries. Access to the Audit Log is typically restricted to administrators.</div>
+
+<hr class="divider" />
+
+<!-- ─────────────────────────────────────────────────────
+     12. ADMIN SETTINGS
+───────────────────────────────────────────────────── -->
+<h2 class="section-title" id="s12"><span class="num">12</span> Admin Settings</h2>
+<p class="section-desc">Admin Settings is the control panel for your ERP system. Configure your company profile, bank accounts, users, roles, permissions, and currency exchange rates. Only users with the Admin role can access this section.</p>
+<span class="module-tag">SIDEBAR → Admin Settings</span>
+
+<h3 id="s12-company">Company Profile</h3>
+<p>Set your company's legal information used on all documents (invoices, purchase orders, payslips):</p>
+<table class="field-table">
+  <tr><th>Field</th><th>Description</th></tr>
+  <tr><td>Company Name</td><td>Legal trading name</td></tr>
+  <tr><td>Company Code</td><td>Read-only unique identifier (set at registration)</td></tr>
+  <tr><td>Business Email</td><td>Appears on outgoing document emails</td></tr>
+  <tr><td>Phone</td><td>Contact number shown on documents</td></tr>
+  <tr><td>Address</td><td>Full registered address for invoices and official documents</td></tr>
+  <tr><td>Tax / VAT Number</td><td>Your company's tax registration number</td></tr>
+  <tr><td>Currency</td><td>Default base currency for the company (USD, EUR, GBP, INR, etc.)</td></tr>
+  <tr><td>Logo</td><td>Company logo displayed on printed documents</td></tr>
+</table>
+<p>Click <strong>"Save Changes"</strong> after updating any fields.</p>
+
+<h3 id="s12-bank">Bank Accounts</h3>
+<p>Bank Accounts configured here appear as options when recording payments and doing bank reconciliation.</p>
+
+<h4>Adding a Bank Account</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "Add Bank Account"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter Account Name</strong>e.g. "Main Operating Account"</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Bank Name, Account Number, and IBAN</strong></div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Select Currency</strong>for multi-currency bank accounts</div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Set as Default</strong>(optional) — the default account is pre-selected when recording payments</div></li>
+  <li><span class="step-num">6</span><div class="step-body"><strong>Save</strong></div></li>
+</ol>
+
+<h3 id="s12-users">Users & Roles</h3>
+
+<h4>Inviting a New User</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "Invite User"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter the user's email address</strong></div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Select their Role</strong>from the existing roles list</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Click "Send Invite"</strong>The user receives an invitation email with a link to set their password and join the company.</div></li>
+</ol>
+
+<h4>Managing Existing Users</h4>
+<p>The Users list shows all users with access to your company. You can:</p>
+<ul>
+  <li><strong>Change Role:</strong> Click the edit icon next to a user to change their assigned role.</li>
+  <li><strong>Remove Access:</strong> Click the delete icon to revoke a user's access to this company.</li>
+</ul>
+
+<h4>Creating a Role</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "New Role"</strong> in the Roles tab</div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Enter a Role Name</strong>e.g. "Sales Manager", "Accountant", "HR Officer"</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Save</strong>The role is created with no permissions by default. Configure permissions next.</div></li>
+</ol>
+
+<h3 id="s12-perms">Permissions</h3>
+<p>Permissions control exactly what each role can do within each module. Click <strong>"Edit Permissions"</strong> next to any role to open the permission matrix.</p>
+
+<h4>Permission Matrix</h4>
+<table class="field-table">
+  <tr><th>Module</th><th>View</th><th>Create</th><th>Edit</th><th>Delete</th><th>Post</th><th>Approve</th></tr>
+  <tr><td>Dashboard</td><td>✓/✗</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Sales</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td></tr>
+  <tr><td>Procurement</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td></tr>
+  <tr><td>Inventory</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>—</td></tr>
+  <tr><td>Finance</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td></tr>
+  <tr><td>HR</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td></tr>
+  <tr><td>Payments</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>—</td><td>—</td></tr>
+  <tr><td>Admin</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>✓/✗</td><td>—</td><td>—</td></tr>
+</table>
+<p>Check or uncheck each action for each module. Click <strong>"Save Permissions"</strong> to apply. Changes take effect immediately on the next page load for the affected users.</p>
+
+<div class="box box-warn"><strong>Important:</strong> Be careful granting the <strong>Post</strong> permission. Users with Post access can commit irreversible transactions to the general ledger. Similarly, the <strong>Delete</strong> permission allows permanent data removal. Grant these only to trusted roles.</div>
+
+<h3 id="s12-fx">Exchange Rates</h3>
+<span class="module-tag">Admin Settings → Exchange Rates</span>
+<p>If your company transacts in multiple currencies, configure exchange rates here. Rates are used when converting foreign currency invoices to your base currency for the general ledger.</p>
+
+<h4>Adding an Exchange Rate</h4>
+<ol class="steps">
+  <li><span class="step-num">1</span><div class="step-body"><strong>Click "Add Rate"</strong></div></li>
+  <li><span class="step-num">2</span><div class="step-body"><strong>Select Currency</strong>e.g. EUR, GBP, AED</div></li>
+  <li><span class="step-num">3</span><div class="step-body"><strong>Enter Rate</strong>How many units of your base currency equal one unit of the foreign currency. e.g. if base = USD and you enter EUR rate = 1.08, then €1 = $1.08.</div></li>
+  <li><span class="step-num">4</span><div class="step-body"><strong>Set Effective Date</strong></div></li>
+  <li><span class="step-num">5</span><div class="step-body"><strong>Save</strong></div></li>
+</ol>
+<p>Update exchange rates regularly (daily or weekly) to keep your foreign currency balances accurate. The system uses the most recent rate that is on or before the transaction date.</p>
+
+</div><!-- /content -->
+
+<!-- ══════════════════════════════════════════════════════
+     BACK COVER / APPENDIX
+══════════════════════════════════════════════════════ -->
+<div style="background:#F8FAFC; border-top:3px solid #E2E8F0; padding:60px 80px; margin-top:60px;" class="page-break">
+  <h2 style="font-size:1.5rem;font-weight:800;color:#1A2332;margin-bottom:24px;">Quick Reference — Status Codes</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px;">
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#5F6B7C;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Document Statuses</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem;">
+        <div><span class="badge badge-draft">Draft</span> — Editable, not in ledger</div>
+        <div><span class="badge badge-posted">Posted</span> — In ledger, immutable</div>
+        <div><span class="badge badge-approved">Approved</span> — Reviewed & confirmed</div>
+        <div><span class="badge badge-paid">Paid</span> — Fully settled</div>
+        <div><span class="badge badge-pending">Partially Paid</span> — Part payment received</div>
+        <div><span class="badge badge-overdue">Overdue</span> — Past due date</div>
+        <div><span class="badge badge-cancelled">Cancelled</span> — Voided with reversal</div>
+        <div><span class="badge badge-rejected">Rejected</span> — Declined by approver</div>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#5F6B7C;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Key Permissions</h4>
+      <div style="font-size:0.88rem;display:flex;flex-direction:column;gap:8px;">
+        <div><strong>View</strong> — Read-only access</div>
+        <div><strong>Create</strong> — Make new records</div>
+        <div><strong>Edit</strong> — Modify draft records</div>
+        <div><strong>Delete</strong> — Remove records permanently</div>
+        <div><strong>Post</strong> — Commit to the general ledger</div>
+        <div><strong>Approve</strong> — Approve workflow requests</div>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#5F6B7C;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Common Workflows</h4>
+      <div style="font-size:0.85rem;display:flex;flex-direction:column;gap:10px;">
+        <div><strong>Sales cycle:</strong> Lead → Customer → Quote → Order → Invoice → Payment</div>
+        <div><strong>Purchase cycle:</strong> PO → GRN → Bill → Payment</div>
+        <div><strong>Payroll cycle:</strong> Structure → Generate → Approve → Paid</div>
+        <div><strong>Leave cycle:</strong> Apply → Approve → Balance updated</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 style="font-size:1.5rem;font-weight:800;color:#1A2332;margin-bottom:16px;">Need Help?</h2>
+  <p style="color:#5F6B7C;font-size:0.93rem;max-width:600px;">
+    If you encounter an issue not covered in this guide, please contact your system administrator.
+    For technical errors, note the error message and the exact steps that led to it before reporting.
+  </p>
+
+  <div style="margin-top:60px;padding-top:24px;border-top:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:0.8rem;color:#94A3B8;">ERP System — User Manual v1.0</div>
+    <div style="font-size:0.8rem;color:#94A3B8;">Confidential — Internal Use Only</div>
+  </div>
+</div>
+
+<!-- Print Button (hidden when printing) -->
+<button class="print-btn no-print" onclick="window.print()">🖨 Save as PDF / Print</button>
+
+</body>
+</html>

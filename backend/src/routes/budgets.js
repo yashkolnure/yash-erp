@@ -1,0 +1,11 @@
+const router = require('express').Router({ mergeParams: true });
+const auth = require('../middleware/auth');
+const ctrl = require('../controllers/budgetController');
+router.use(auth);
+router.get('/', ctrl.listBudgets);
+router.post('/', ctrl.createBudget);
+router.get('/:id', ctrl.getBudget);
+router.put('/:id', ctrl.updateBudget);
+router.post('/:id/activate', ctrl.activateBudget);
+router.get('/:id/variance', ctrl.getBudgetVariance);
+module.exports = router;

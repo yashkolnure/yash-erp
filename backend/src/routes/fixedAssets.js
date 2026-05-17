@@ -1,0 +1,12 @@
+const router = require('express').Router({ mergeParams: true });
+const auth = require('../middleware/auth');
+const ctrl = require('../controllers/fixedAssetController');
+router.use(auth);
+router.get('/', ctrl.listAssets);
+router.post('/', ctrl.createAsset);
+router.get('/:id', ctrl.getAsset);
+router.put('/:id', ctrl.updateAsset);
+router.post('/:id/depreciate', ctrl.calculateDepreciation);
+router.post('/:id/dispose', ctrl.disposeAsset);
+router.get('/:id/schedule', ctrl.getDepreciationSchedule);
+module.exports = router;
