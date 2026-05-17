@@ -12,13 +12,15 @@
 **A production-ready, open-source ERP built with the MERN stack.**  
 Manage sales, procurement, inventory, finance, HR, payroll, and approvals — all in one place.
 
-[Live Demo](#) · [User Manual](./ERP_User_Manual.html) · [Report a Bug](https://github.com/yashkolnure/yash-erp/issues) · [Request Feature](https://github.com/yashkolnure/yash-erp/issues)
+[Portfolio](https://avenirya.com) · [User Manual](./ERP_User_Manual.html) · [Report a Bug](https://github.com/yashkolnure/yash-erp/issues) · [Request Feature](https://github.com/yashkolnure/yash-erp/issues)
 
 ---
 
 ### 👨‍💻 Built by Yash Kolnure
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Yash_Kolnure-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/yashkolnure)
+[![Portfolio](https://img.shields.io/badge/Portfolio-avenirya.com-6366F1?logo=vercel&logoColor=white)](https://avenirya.com)
+[![Email](https://img.shields.io/badge/Email-yashkolnure58@gmail.com-EA4335?logo=gmail&logoColor=white)](mailto:yashkolnure58@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-yashkolnure-181717?logo=github&logoColor=white)](https://github.com/yashkolnure)
 [![Open to Work](https://img.shields.io/badge/Open_to_Work-✅_Actively_Looking-brightgreen)](https://linkedin.com/in/yashkolnure)
 
@@ -373,6 +375,8 @@ This ERP project is a showcase of my skills across the entire stack — from dat
 | | |
 |--|--|
 | 💼 **LinkedIn** | [linkedin.com/in/yashkolnure](https://linkedin.com/in/yashkolnure) |
+| 🌐 **Portfolio** | [avenirya.com](https://avenirya.com) |
+| 📧 **Email** | [yashkolnure58@gmail.com](mailto:yashkolnure58@gmail.com) |
 | 🐙 **GitHub** | [github.com/yashkolnure](https://github.com/yashkolnure) |
 | 🟢 **Status** | **Open to Work** — Full-Stack / Backend / Frontend roles |
 
